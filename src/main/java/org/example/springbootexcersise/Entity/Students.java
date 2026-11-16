@@ -22,10 +22,10 @@ public class Students {
     private long id;
 
     @Column (name ="firstName", nullable = false)
-    private String firstname;
+    private String firstName;
 
     @Column (name = "lastName", nullable = false)
-    private  String lastname;
+    private  String lastName;
 
     @Column (name = "email" , nullable = false)
     private String email;
