@@ -33,7 +33,7 @@ public class StudentService {
         return mapToResponse(savedStudent);
     }
 //READ ALL
-    @Transactional(readOnly = true)
+    @Transactional
     public  List<StudentResponse> getAllStudents(){
         return studentRepository.findAll()
                 .stream()
@@ -43,7 +43,7 @@ public class StudentService {
     }
 
     //READ ONE
-    @Transactional(readOnly = true)
+    @Transactional
     public StudentResponse getStudentById(long id){
 
         Students student = findStudentsOrThrow(id);
@@ -53,7 +53,7 @@ public class StudentService {
     }
     //UPDATE
     @Transactional
-    public  StudentResponse updateStudent(long id, studentRequest request){
+    public  StudentResponse updateStudent(long id, StudentRequest request){
       Students student = findStudentsOrThrow(id);
 
       boolean emailUsedByAnotherStudent = studentRepository.existsByEmailAndIdNot(request.email(), id);
@@ -64,13 +64,13 @@ public class StudentService {
                     "Another student is already using this email"
             );
         }
-student.setFirstName((request.firstName());
+student.setFirstName((request.firstName()));
 
-student.setLastName((request.lastName());
+student.setLastName((request.lastName()));
 student.setEmail(request.email());
 
 Students updatedStudent = studentRepository.save(student);
-return  mapToResponse(updatedStudents);
+return  mapToResponse(updatedStudent);
 
 }
 //DELETE
@@ -86,7 +86,7 @@ public  void deleteStudent (long id){
               ));
 
   }
-    private StudentResponse mapToResponse(Student student) {
+    private StudentResponse mapToResponse(Students student) {
 
         return new StudentResponse(
                 student.getId(),
