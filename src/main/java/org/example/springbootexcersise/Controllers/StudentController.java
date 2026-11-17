@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/students")
 public class StudentController {
@@ -59,6 +61,11 @@ public class StudentController {
         StudentService.deleteStudent(id);
 
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping
+    public  ResponseEntity<List<StudentResponse>> getAllStudents(){
+        return ResponseEntity.ok(StudentService.getAllStudents());
     }
 }
 

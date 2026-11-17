@@ -4,6 +4,8 @@ import jakarta.transaction.Transactional;
 import org.example.springbootexcersise.DTO.StudentRequest;
 import org.example.springbootexcersise.DTO.StudentResponse;
 import org.example.springbootexcersise.Entity.Students;
+import org.example.springbootexcersise.Exceptions.DuplicateResourceException;
+import org.example.springbootexcersise.Exceptions.ResourceNotFoundException;
 import org.example.springbootexcersise.repositry.StudentRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -20,7 +22,7 @@ public class StudentService {
     public StudentResponse createStudent (StudentRequest request)
     {
         if (studentRepository.existsByEmail(request.email())){
-            throw new DuplicateResourseException("A student with this email already exists");
+            throw new DuplicateResourceException("A student with this email already exists");
         }
 
         Students student = new Students();
